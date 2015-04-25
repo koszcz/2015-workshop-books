@@ -6,3 +6,14 @@
 <p><%= link_to "Back to list", books_path %></p>
 <p><%= link_to "Edit", edit_book_path(@book) %></p>
 <p><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+
+<h2>Comments</h2>
+
+<% @book.comments.each do |comment| %>
+  <p><%= comment.content %></p>  
+<% end %> 
+
+<%= form_for @book.comments.new, url: book_comments_path(@book) do |form| %>
+  <p><%= form.text_area :content %></p>
+  <p><%= form.submit %></p>
+<% end %>
