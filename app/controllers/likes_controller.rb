@@ -22,6 +22,6 @@ class LikesController < ApplicationController
   	  Comment.find(params[:comment_id])
   	else
   	  Book.find(params[:book_id])
-	end
+	  end
   end
 end
