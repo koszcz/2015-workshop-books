@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root 'books#index'
 
   resources :books do
-    resources :comments, only: [:create]
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:create] do
+      resources :likes, only: [:create, :destroy]
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

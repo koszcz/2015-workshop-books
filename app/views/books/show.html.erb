@@ -3,6 +3,12 @@
 <p>Author: <%= raw @book.author %></p>
 <p>Description: <%= @book.description %></p>
 
+<% if @book.is_liked_by? current_user %>
+  <%= unlike_for_book(@book, current_user) %>
+<% else %>
+  <%= like_for_book(@book) %> 
+<% end %>
+
 <p><%= link_to "Back to list", books_path %></p>
 <p><%= link_to "Edit", edit_book_path(@book) %></p>
 <p><%= link_to "Delete", @book, method: :delete, data: { confirm: 'Are you sure?' } %></p>
@@ -10,10 +16,7 @@
 <h2>Comments</h2>
 
 <% @book.comments.each do |comment| %>
-  <p><%= comment.content %></p>  
+  <%= render partial: 'comment', locals: { comment: comment } %> 
 <% end %> 
 
-<%= form_for @book.comments.new, url: book_comments_path(@book) do |form| %>
-  <p><%= form.text_area :content %></p>
-  <p><%= form.submit %></p>
-<% end %>
+<%= render 'new_comment' %>

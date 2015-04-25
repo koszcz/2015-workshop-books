@@ -1,0 +1,4 @@
+<%= form_for @book.comments.new, url: book_comments_path(@book) do |form| %>
+  <p><%= form.text_area :content %></p>
+  <p><%= form.submit %></p>
+<% end %>
