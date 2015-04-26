@@ -24,4 +24,22 @@ describe Comment, type: :model do
     end
   end
 
+  describe "#made_within_one_hour? (integration)" do
+
+    it 'should return true when comment is added within an hour' do
+      comment = Comment.create(content: "test")
+      current_time = comment.created_at + 30.minutes
+
+      expect(comment.made_within_one_hour?(current_time)).to eq(true)
+    end
+
+    it 'should return false when comment is added over an hour ago' do
+      comment = Comment.create(content: "test")
+      current_time = comment.created_at + 2.hours
+
+      expect(comment.made_within_one_hour?(current_time)).to eq(false)
+    end
+
+  end
+
 end	

@@ -13,6 +13,14 @@
   <p><%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 <% end %>
 
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<% end %>
+
+<% if flash[:alert] %>
+<%= flash[:alert] %>
+<% end %>
+
 <%= yield %>
 
 </body>
