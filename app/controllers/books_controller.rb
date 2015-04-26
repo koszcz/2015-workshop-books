@@ -15,7 +15,8 @@ class BooksController < ApplicationController
 
   def create
   	book = Book.create(permitted_params)
-  	redirect_to book
+    UserMailer.confirmation_email(current_user, book).deliver_now
+    redirect_to(book, notice: 'Book was successfully added.')
   end
 
   def edit
